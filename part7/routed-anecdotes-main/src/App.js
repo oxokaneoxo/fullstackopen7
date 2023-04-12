@@ -90,7 +90,7 @@ const CreateNew = ({addNew, setNotification}) => {
     }, 5000)
   }
 
-  const reset = () => {
+  const resetFields = () => {
     content.reset()
     author.reset()
     info.reset()
@@ -113,7 +113,7 @@ const CreateNew = ({addNew, setNotification}) => {
           <input type={info.type} value={info.value} onChange={info.onChange} />
         </div>
         <button>create</button>
-        <button type="button" onClick={reset}>reset</button>
+        <button type="button" onClick={resetFields}>reset</button>
       </form>
     </div>
   )
