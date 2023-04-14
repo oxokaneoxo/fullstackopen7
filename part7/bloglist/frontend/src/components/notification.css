@@ -1,0 +1,22 @@
+.notifications {
+    font-size: 20px;
+    width: 400px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.positive {
+    color: #257a3d;
+    border: 3px solid #17b844;
+    background: #bcf0da;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.error {
+    color: #d32b15;
+    border: 3px solid #ff6550;
+    background: #e8d9d9;
+    border-radius: 10px;
+    padding: 10px;
+}

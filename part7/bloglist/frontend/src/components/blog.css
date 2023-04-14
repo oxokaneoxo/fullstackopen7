@@ -1,0 +1,19 @@
+.blog_container {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-left: 2px;
+    margin-top: 5px;
+    border: 2px solid black;
+}
+
+.blog_container p {
+    margin: 0px;
+}
+
+.blog_button {
+    width: 50px;
+    margin: 5px;
+    margin-bottom: 0px;
+}
