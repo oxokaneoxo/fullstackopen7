@@ -1,19 +1,31 @@
 import React from "react"
-import "./notification.css"
+import { useSelector } from "react-redux"
 
-const Notification = ({ notificationMessage, errorMessage }) => {
-  if (notificationMessage === null && errorMessage === null) {
+
+const Notification = () => {
+  const notification = useSelector((state) => state.notification)
+  if (notification === null) {
     return null
+  }
+  const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1,
+    color: 'green',
+  }
+  const errorStyle = {
+    ...style,
+    color: 'red',
   }
 
   return (
-    <div className="notifications">
-      {notificationMessage !== null ? (
-        <div className="positive">{notificationMessage}</div>
-      ) : (
-        <div className="error">{errorMessage}</div>
-      )}
-    </div>
+    <>
+      {notification.message &&
+        <div style={notification.type === "success" ? style : errorStyle}>
+          {notification.message}
+        </div>
+      }
+    </>
   )
 }
 

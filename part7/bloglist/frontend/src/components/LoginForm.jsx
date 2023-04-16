@@ -7,16 +7,11 @@ const loginForm = ({
   setUsername,
   password,
   setPassword,
-  errorMessage,
-  notificationMessage,
 }) => {
   return (
     <div>
       <h1>Log in to application</h1>
-      <Notification
-        errorMessage={errorMessage}
-        notificationMessage={notificationMessage}
-      />
+      <Notification />
       <form onSubmit={handleLogin}>
         <div>
           username

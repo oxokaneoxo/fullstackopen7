@@ -3,14 +3,16 @@ import blogService from "./services/blogs"
 import loginService from "./services/login"
 import LoginForm from "./components/LoginForm"
 import Blogs from "./components/Blogs"
+import { useDispatch } from "react-redux"
+import { setNotification } from "./reducers/notificationReducer"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [notificationMessage, setNotificationMessage] = useState(null)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -38,16 +40,9 @@ const App = () => {
       setUser(user)
       setUsername("")
       setPassword("")
-
-      setNotificationMessage(`${user.name} logged in`)
-      setTimeout(() => {
-        setNotificationMessage(null)
-      }, 3000)
+      dispatch(setNotification(`${user.name} logged in`, 3))
     } catch (exception) {
-      setErrorMessage("Wrong credentials")
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 3000)
+      dispatch(setNotification(`Wrong details`, 3, "error"))
     }
   }
 
@@ -57,17 +52,10 @@ const App = () => {
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog))
       blogFormRef.current.toggleVisibility()
-      setNotificationMessage(
-        `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`
-      )
-      setTimeout(() => {
-        setNotificationMessage(null)
-      }, 5000)
     })
   }
 
   const addLike = (blogObject) => {
-    console.log(blogObject)
     blogService
       .update(blogObject.id, { ...blogObject, likes: blogObject.likes + 1 })
       .then((returnedBlog) => {
@@ -83,12 +71,7 @@ const App = () => {
     ) {
       blogService.remove(blogObject.id).then(() => {
         setBlogs(blogs.filter((blog) => blog.id !== blogObject.id))
-        setNotificationMessage(
-          `Blog ${blogObject.title} by ${blogObject.author} deleted`
-        )
-        setTimeout(() => {
-          setNotificationMessage(null)
-        }, 5000)
+        
       })
     }
   }
@@ -102,8 +85,6 @@ const App = () => {
           setUsername={setUsername}
           password={password}
           setPassword={setPassword}
-          errorMessage={errorMessage}
-          notificationMessage={notificationMessage}
         />
       )}
 
@@ -112,8 +93,6 @@ const App = () => {
           blogFormRef={blogFormRef}
           blogs={blogs}
           user={user}
-          notificationMessage={notificationMessage}
-          errorMessage={errorMessage}
           addBlog={addBlog}
           addLike={addLike}
           deleteBlog={deleteBlog}

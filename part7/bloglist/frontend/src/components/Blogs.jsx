@@ -8,8 +8,6 @@ const Blogs = ({
   blogFormRef,
   blogs,
   user,
-  notificationMessage,
-  errorMessage,
   addBlog,
   addLike,
   deleteBlog,
@@ -23,10 +21,7 @@ const Blogs = ({
     <div>
       <h2>blogs</h2>
 
-      <Notification
-        notificationMessage={notificationMessage}
-        errorMessage={errorMessage}
-      />
+      <Notification />
 
       <p>
         {user.name} logged in
