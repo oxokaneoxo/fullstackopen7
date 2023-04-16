@@ -1,11 +1,25 @@
 import { useState } from "react"
 import "./blog.css"
+import { likeBlog, deleteBlog } from "../reducers/blogReducer"
+import { useDispatch } from "react-redux"
 
-const Blog = ({ blog, user, addLike, deleteBlog }) => {
+
+const Blog = ({ blog, user }) => {
   const [detailsVisible, setDetailsVisible] = useState(false)
 
   const hideWhenVisible = { display: detailsVisible ? "none" : "" }
   const showWhenVisible = { display: detailsVisible ? "" : "none" }
+
+  const dispatch = useDispatch()
+
+  const addLike = (e, blog) => {
+    dispatch(likeBlog(blog))
+  }
+  const removeBlog = (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      dispatch(deleteBlog(blog.id))
+    }
+  }
 
   return (
     <div className="blog_container">
@@ -36,7 +50,7 @@ const Blog = ({ blog, user, addLike, deleteBlog }) => {
           <button
             className="like_button"
             data-testid="like_button"
-            onClick={() => addLike(blog)}
+            onClick={(e) => addLike(e, blog)}
           >
             like
           </button>
@@ -48,7 +62,7 @@ const Blog = ({ blog, user, addLike, deleteBlog }) => {
         )}
         {(blog.user.username === user.username ||
           blog.user.username === undefined) && (
-          <button onClick={() => deleteBlog(blog)}>Remove</button>
+          <button onClick={() => removeBlog(blog)}>Remove</button>
         )}
       </div>
     </div>

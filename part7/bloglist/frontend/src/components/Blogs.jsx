@@ -3,15 +3,18 @@ import Blog from "../components/Blog"
 import BlogForm from "./BlogForm"
 import Notification from "./Notification"
 import Togglable from "./Togglable"
+import { useSelector } from "react-redux"
+
 
 const Blogs = ({
   blogFormRef,
-  blogs,
   user,
-  addBlog,
-  addLike,
-  deleteBlog,
 }) => {
+
+  const blogs = useSelector((state) => state.blogs)
+  let sortedBlogs = [...blogs]
+  sortedBlogs.sort((a, b) => b.likes - a.likes)
+
   const handleLogout = () => {
     window.localStorage.clear()
     window.location.reload()
@@ -30,18 +33,14 @@ const Blogs = ({
         </button>
       </p>
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
-        <BlogForm addBlog={addBlog} />
+        <BlogForm />
       </Togglable>
-
-      {blogs
-        .sort((a, b) => b.likes - a.likes)
+      {sortedBlogs
         .map((blog) => (
           <Blog
             key={blog.id}
             blog={blog}
             user={user}
-            addLike={addLike}
-            deleteBlog={deleteBlog}
           />
         ))}
     </div>

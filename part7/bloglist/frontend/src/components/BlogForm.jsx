@@ -1,8 +1,8 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { setNotification } from '../reducers/notificationReducer'
+import { createBlog } from '../reducers/blogReducer'
 
-const BlogForm = ({ addBlog }) => {
+const BlogForm = () => {
 
   const dispatch = useDispatch()
 
@@ -12,12 +12,7 @@ const BlogForm = ({ addBlog }) => {
     const title = event.target.title.value
     const author = event.target.author.value
     const url = event.target.url.value
-    dispatch(setNotification(`a new blog ${title} by ${author} added`), 3)
-    addBlog({
-      title: title,
-      author: author,
-      url: url,
-    })
+    dispatch(createBlog({title, author, url, likes: 0}))
     event.target.title.value = ""
     event.target.author.value = ""
     event.target.url.value = ""
