@@ -1,11 +1,8 @@
 import React from "react"
 import Notification from "./Notification"
-import { loginUser } from '../reducers/userReducer'
+import { loginUser } from "../reducers/userReducer"
 
-const loginForm = ({
-  dispatch,
-}) => {
-
+const loginForm = ({ dispatch }) => {
   const handleLogin = (event) => {
     event.preventDefault()
     const username = event.target.username.value
@@ -20,19 +17,11 @@ const loginForm = ({
       <form onSubmit={handleLogin}>
         <div>
           username
-          <input
-            type="text"
-            id="username"
-            name="username"
-          />
+          <input type="text" id="username" name="username" />
         </div>
         <div>
           password
-          <input
-            type="password"
-            id="password"
-            name="password"
-          />
+          <input type="password" id="password" name="password" />
         </div>
         <button id="login-button" type="submit">
           Login

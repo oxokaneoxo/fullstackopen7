@@ -3,7 +3,6 @@ import "./blog.css"
 import { likeBlog, deleteBlog } from "../reducers/blogReducer"
 import { useDispatch } from "react-redux"
 
-
 const Blog = ({ blog, user }) => {
   const [detailsVisible, setDetailsVisible] = useState(false)
 

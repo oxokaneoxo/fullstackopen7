@@ -1,28 +1,25 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import userService from '../services/users'
+import React from "react"
+import { useState, useEffect } from "react"
+import userService from "../services/users"
 
 const Users = ({ user }) => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    userService
-      .getAll()
-      .then(users => {
-        setUsers(users)
-      })
+    userService.getAll().then((users) => {
+      setUsers(users)
+    })
   }, [])
 
-  console.log('users', users);
+  console.log("users", users)
 
   const handleLogout = () => {
     window.localStorage.clear()
     window.location.reload()
   }
 
-
   return (
-    <div className='userlist'>
+    <div className="userlist">
       <h2>Users</h2>
       <p>
         {user.name} logged in
@@ -39,7 +36,7 @@ const Users = ({ user }) => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {users.map((user) => (
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.blogs.length}</td>

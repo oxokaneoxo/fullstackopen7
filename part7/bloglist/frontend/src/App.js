@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { initializeBlogs } from "./reducers/blogReducer"
 import { checkUserFromLocalStorage } from "./reducers/userReducer"
 import { useSelector } from "react-redux"
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link } from "react-router-dom"
 import Users from "./components/Users"
 
 const App = () => {
@@ -16,16 +16,12 @@ const App = () => {
     dispatch(checkUserFromLocalStorage())
   }, [dispatch])
 
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   const blogFormRef = useRef()
 
   return (
     <div>
-      {user === null && (
-        <LoginForm
-          dispatch={dispatch}
-        />
-      )}
+      {user === null && <LoginForm dispatch={dispatch} />}
 
       {user !== null && (
         <div>
@@ -34,8 +30,11 @@ const App = () => {
             <Link to="/users">users</Link>
           </div>
           <Routes>
-            <Route path="/" element={<Blogs blogFormRef={blogFormRef} user={user} />} />
-            <Route path="/users" element={<Users user={user}/>} />
+            <Route
+              path="/"
+              element={<Blogs blogFormRef={blogFormRef} user={user} />}
+            />
+            <Route path="/users" element={<Users user={user} />} />
           </Routes>
         </div>
       )}

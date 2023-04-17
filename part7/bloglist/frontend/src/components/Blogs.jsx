@@ -5,12 +5,7 @@ import Notification from "./Notification"
 import Togglable from "./Togglable"
 import { useSelector } from "react-redux"
 
-
-const Blogs = ({
-  blogFormRef,
-  user,
-}) => {
-
+const Blogs = ({ blogFormRef, user }) => {
   const blogs = useSelector((state) => state.blogs)
   let sortedBlogs = [...blogs]
   sortedBlogs.sort((a, b) => b.likes - a.likes)
@@ -35,14 +30,9 @@ const Blogs = ({
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
         <BlogForm />
       </Togglable>
-      {sortedBlogs
-        .map((blog) => (
-          <Blog
-            key={blog.id}
-            blog={blog}
-            user={user}
-          />
-        ))}
+      {sortedBlogs.map((blog) => (
+        <Blog key={blog.id} blog={blog} user={user} />
+      ))}
     </div>
   )
 }
