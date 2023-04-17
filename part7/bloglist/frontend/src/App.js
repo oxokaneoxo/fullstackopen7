@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux"
 import { initializeBlogs } from "./reducers/blogReducer"
 import { checkUserFromLocalStorage } from "./reducers/userReducer"
 import { useSelector } from "react-redux"
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import Users from "./components/Users"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,10 +28,16 @@ const App = () => {
       )}
 
       {user !== null && (
-        <Blogs
-          blogFormRef={blogFormRef}
-          user={user}
-        />
+        <div>
+          <div className="navbar">
+            <Link to="/">blogs</Link>
+            <Link to="/users">users</Link>
+          </div>
+          <Routes>
+            <Route path="/" element={<Blogs blogFormRef={blogFormRef} user={user} />} />
+            <Route path="/users" element={<Users user={user}/>} />
+          </Routes>
+        </div>
       )}
     </div>
   )
