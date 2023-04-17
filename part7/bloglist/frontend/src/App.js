@@ -7,6 +7,7 @@ import { checkUserFromLocalStorage } from "./reducers/userReducer"
 import { useSelector } from "react-redux"
 import { Routes, Route, Link } from "react-router-dom"
 import Users from "./components/Users"
+import User from "./components/User"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -35,6 +36,7 @@ const App = () => {
               element={<Blogs blogFormRef={blogFormRef} user={user} />}
             />
             <Route path="/users" element={<Users user={user} />} />
+            <Route path="/users/:id" element={<User user={user} />} />
           </Routes>
         </div>
       )}
