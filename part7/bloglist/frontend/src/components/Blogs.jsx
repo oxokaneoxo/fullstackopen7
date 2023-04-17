@@ -10,22 +10,12 @@ const Blogs = ({ blogFormRef, user }) => {
   let sortedBlogs = [...blogs]
   sortedBlogs.sort((a, b) => b.likes - a.likes)
 
-  const handleLogout = () => {
-    window.localStorage.clear()
-    window.location.reload()
-  }
-
   return (
     <div className="bloglist">
       <h2>Blogs</h2>
       <Notification />
-      
-      <p>
-        {user.name} logged in
-        <button type="botton" name="Logout" onClick={() => handleLogout()}>
-          Logout
-        </button>
-      </p>
+
+
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
         <BlogForm />
       </Togglable>

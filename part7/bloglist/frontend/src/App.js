@@ -21,6 +21,11 @@ const App = () => {
   const user = useSelector((state) => state.user)
   const blogFormRef = useRef()
 
+  const handleLogout = () => {
+    window.localStorage.clear()
+    window.location.reload()
+  }
+
   return (
     <div>
       {user === null && <LoginForm dispatch={dispatch} />}
@@ -30,6 +35,12 @@ const App = () => {
           <div className="navbar">
             <Link to="/">blogs</Link>
             <Link to="/users">users</Link>
+            <span>
+              {user.name} logged in
+              <button type="botton" name="Logout" onClick={() => handleLogout()}>
+                Logout
+              </button>
+            </span>
           </div>
           <Routes>
             <Route

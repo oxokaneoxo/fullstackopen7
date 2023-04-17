@@ -12,21 +12,9 @@ const Users = ({ user }) => {
     })
   }, [])
 
-  const handleLogout = () => {
-    window.localStorage.clear()
-    window.location.reload()
-  }
-
   return (
     <div className="userlist">
       <h2>Users</h2>
-      <p>
-        {user.name} logged in
-        <button type="botton" name="Logout" onClick={() => handleLogout()}>
-          Logout
-        </button>
-      </p>
-
       <table>
         <thead>
           <tr>
