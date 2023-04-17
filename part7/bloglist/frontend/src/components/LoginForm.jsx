@@ -1,13 +1,18 @@
 import React from "react"
 import Notification from "./Notification"
+import { loginUser } from '../reducers/userReducer'
 
 const loginForm = ({
-  handleLogin,
-  username,
-  setUsername,
-  password,
-  setPassword,
+  dispatch,
 }) => {
+
+  const handleLogin = (event) => {
+    event.preventDefault()
+    const username = event.target.username.value
+    const password = event.target.password.value
+    dispatch(loginUser(username, password))
+  }
+
   return (
     <div>
       <h1>Log in to application</h1>
@@ -17,20 +22,16 @@ const loginForm = ({
           username
           <input
             type="text"
-            value={username}
             id="username"
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+            name="username"
           />
         </div>
         <div>
           password
           <input
             type="password"
-            value={password}
             id="password"
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+            name="password"
           />
         </div>
         <button id="login-button" type="submit">
