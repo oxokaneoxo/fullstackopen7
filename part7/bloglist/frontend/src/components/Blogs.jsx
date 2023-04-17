@@ -18,9 +18,8 @@ const Blogs = ({ blogFormRef, user }) => {
   return (
     <div className="bloglist">
       <h2>Blogs</h2>
-
       <Notification />
-
+      
       <p>
         {user.name} logged in
         <button type="botton" name="Logout" onClick={() => handleLogout()}>
