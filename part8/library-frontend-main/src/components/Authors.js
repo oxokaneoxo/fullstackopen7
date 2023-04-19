@@ -22,8 +22,6 @@ const Authors = (props) => {
 
   const authors = result.data.allAuthors
 
- 
-
   const submit = async (event) => {
     event.preventDefault()
 
